@@ -4,4 +4,22 @@ class PhotosController < ApplicationController
   def index
     @photos = Photo.all
   end
+
+  def new
+    @photo = Photo.new
+  end
+
+  #def create及def photo_parms : 使"new"頁面最後的submit-button可以真正送data到rails-web裡
+  #def photo_params使用private method式的定義
+  #把讀取 params 的過程包在 photo_params 裡，再從 create action 裡呼叫，送給Photo.new 做為參數。
+  def create
+    @photo = Photo.new(photo_params)
+    @photo.save
+    redirect_to photos_url
+  end
+
+  private
+  def photo_params
+    params.require(:photo).permit(:title, :date, :description, :file_location)
+  end
 end
