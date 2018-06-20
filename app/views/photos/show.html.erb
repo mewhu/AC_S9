@@ -1,0 +1,6 @@
+<%= @photo.title %>
+<%= @photo.date %>
+<img src="<%= "/"+@photo.file_location %>" alt="">
+
+<%#= simple_format 會自動將表單傳入資料時會帶有的 \n (newline，換行字元)，轉譯為 HTML 中代表換行的 <br /> 或段落 <p></p>。%>
+<%= simple_format(@photo.description) %>
