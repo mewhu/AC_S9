@@ -4,4 +4,8 @@
 
 <%#= simple_format 會自動將表單傳入資料時會帶有的 \n (newline，換行字元)，轉譯為 HTML 中代表換行的 <br /> 或段落 <p></p>。%>
 <%= simple_format(@photo.description) %>
+
+<%#= photos_path拆解如下 %>
+<%#= "photos"為rails routes中, index-action在rails(or RESTful)中所被代稱的prefix %>
+<%#= prefix "photos"搭配"_path" : 代表專案內部的相對路徑 %>
 <%= link_to 'Back to Index', photos_path %>
