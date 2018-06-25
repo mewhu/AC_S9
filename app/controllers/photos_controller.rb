@@ -24,8 +24,12 @@ class PhotosController < ApplicationController
   #photos_url : index-action的RESTful prefix "photos" 配上 "_url", 可以産生index首頁的URL位置
   def create
     @photo = Photo.new(photo_params)
-    @photo.save
-    redirect_to photos_url
+
+    if @photo.save
+      redirect_to photos_url
+    else
+      render :action => :new
+    end
   end
 
 
@@ -47,10 +51,13 @@ class PhotosController < ApplicationController
 
   def update
     @photo = Photo.find(params[:id])
-    @photo.update_attributes(photo_params)
 
-    #設定update結束後將頁面導到該@photo的"show"頁面
-    redirect_to photo_path(@photo)
+    if @photo.update_attributes(photo_params)
+      #設定update結束後將頁面導到該@photo的"show"頁面
+      redirect_to photo_path(@photo)
+    else
+      render :action => :edit
+    end
   end
 
 
