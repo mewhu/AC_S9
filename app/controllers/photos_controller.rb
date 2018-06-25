@@ -1,4 +1,9 @@
 class PhotosController < ApplicationController
+  # 用before_action這個功能，在:show, :edit, :update及:destroy等處設定 private function "target_photo" 的callback
+  # PS: 舊版rails是用before_filter
+  before_action :target_photo, :only => [:show, :edit, :update, :destroy]
+
+  
   ####################################################
   ########## 以下為controller action "index" ##########
   ####################################################
@@ -38,7 +43,8 @@ class PhotosController < ApplicationController
   ###################################################
   def show
     #叫controller用model "Photo"中的find(params[:id])方法去取得資料，並且用@photo實例變數接住，送去給show頁面
-    @photo = Photo.find(params[:id])
+    # 以before_action設定callback後，即可把原先的程式碼mark down
+    # @photo = Photo.find(params[:id])
   end
 
 
@@ -46,11 +52,13 @@ class PhotosController < ApplicationController
   ########## 以下為controller action "edit" 及 "update" ##########
   ###############################################################
   def edit
-    @photo = Photo.find(params[:id])
+    # 以before_action設定callback後，即可把原先的程式碼mark down
+    # @photo = Photo.find(params[:id])
   end
 
   def update
-    @photo = Photo.find(params[:id])
+    # 以before_action設定callback後，即可把原先的程式碼mark down
+    # @photo = Photo.find(params[:id])
 
     if @photo.update_attributes(photo_params)
       #設定update結束後將頁面導到該@photo的"show"頁面
@@ -65,7 +73,8 @@ class PhotosController < ApplicationController
   ########## 以下為controller action "destroy" ##########
   ######################################################
   def destroy
-    @photo = Photo.find(params[:id])
+    # 以before_action設定callback後，即可把原先的程式碼mark down
+    # @photo = Photo.find(params[:id])
     @photo.destroy
     redirect_to photos_url
   end
@@ -76,6 +85,10 @@ class PhotosController < ApplicationController
     params.require(:photo).permit(:title, :date, :description, :file_location)
   end
 
-
+  # 建立private方法"target_photo"，配合before_action做callback，
+  # 以置換掉:show, :edit, :update, :destroy中的重置字眼，符合DRY原則
+  def target_photo
+    @photo = Photo.find(params[:id])
+  end
 
 end
