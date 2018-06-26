@@ -1,6 +1,10 @@
 <%= @photo.title %>
 <%= @photo.date %>
-<img src="<%= "/"+@photo.file_location %>" alt="">
+
+<%# 在使用'carrierwave'作為uploader，並且mount到:file_location上之後
+:file_location就不是string type了，因此原本img+src的字串加法會認不得
+--> 直接改用image_tag的方式顯示圖片 %>
+<%= image_tag @photo.file_location.url %>
 
 <%#= simple_format 會自動將表單傳入資料時會帶有的 \n (newline，換行字元)，轉譯為 HTML 中代表換行的 <br /> 或段落 <p></p>。%>
 <%= simple_format(@photo.description) %>
