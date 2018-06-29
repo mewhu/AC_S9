@@ -55,3 +55,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # install 'carrierwave' as powerful uploader
 gem 'carrierwave'
+gem 'bootstrap-sass', '~> 3.3.7'
+gem 'jquery-rails'
